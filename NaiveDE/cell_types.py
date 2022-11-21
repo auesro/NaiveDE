@@ -35,14 +35,17 @@ def create_colors(lr):
 
 def plot_roc(y_prob, y_test, lr):
     ct_colors = create_colors(lr)
-
+    auc = pd.DataFrame(data=None) #auesro mod
     for i, cell_type in enumerate(lr.classes_):
         fpr, tpr, _ = metrics.roc_curve(y_test == cell_type, y_prob[:, i])
+        AUC = metrics.roc_auc_score(y_test == cell_type, y_prob[:, i]) #auesro mod
+        auc[cell_type] = [AUC] #auesro mod
         plt.plot(fpr, tpr, c=ct_colors[i], lw=2)
 
     plt.plot([0, 1], [0, 1], color='k', ls=':')
     plt.xlabel('FPR')
     plt.ylabel('TPR')
+    return auc #auesro mod
 
 
 def get_top_markers(lr_res, N):
