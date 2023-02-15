@@ -8,7 +8,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
 
-def logistic_model(data, cell_types, sparsity=0.2, fraction=0.5, Solver='liblinear'): #auesro mod (change in default solver leads to not accepting l1 penalty
+def logistic_model(data, cell_types, sparsity=0.2, fraction=0.5, Solver='liblinear'): #auesro mod
     X = (data / data.std()).dropna(1)
     X_train, X_test, y_train, y_test = \
     train_test_split(X, cell_types, test_size=fraction)
